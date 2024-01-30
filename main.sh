@@ -1,8 +1,8 @@
 sudo raspi-config nonint do_ssh 0
-sudo apt-get install vsftpd
+sudo apt-get install -y vsftpd
 sudo service vsftpd start
-sudo apt-get -y install python3-pip 
-sudo apt-get install libglib2.0-dev
+sudo apt-get install -y python3-pip 
+sudo apt-get install -y libglib2.0-dev
 sudo pip3 install flask
 sudo pip3 install bluepy
 mkdir ~/projmet
