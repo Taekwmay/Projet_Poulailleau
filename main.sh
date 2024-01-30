@@ -10,4 +10,4 @@ wget https://github.com/Taekwmay/Projet_Poulailleau/archive/refs/heads/main.tar.
 tar -xzvf main.tar.gz
 cd ~/projmet/Projet_Poulailleau-main
 chmod 766 meteo.py
-sudo ./meteo.py 1>~/projmet/data.log 2>~/projmet/error.log
+sudo python3 meteo.py 1>~/projmet/data.log 2>~/projmet/error.log
