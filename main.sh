@@ -8,4 +8,6 @@ mkdir ~/projmet
 cd ~/projmet
 wget https://github.com/Taekwmay/Projet_Poulailleau/archive/refs/heads/main.tar.gz
 tar -xzvf main.tar.gz
-sudo ./meteo.py 1>data.log 2>error.log
+cd ~/projmet/Projet_Poulailleau-main
+chmod 766 meteo.py
+sudo ./meteo.py 1>~/projmet/data.log 2>~/projmet/error.log
