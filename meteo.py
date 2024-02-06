@@ -15,9 +15,9 @@ def insert_data(device_addr, temperature, humidity, battery):
         cursor = connection.cursor()
 
         # Insérer les données dans la table correspondante au capteur
-        if device_addr == "d6:c6:c7:39:a2:e8":
+        if device_addr == "d6:1c:bf:b7:76:62":
             table_name = "DEMO1"
-        elif device_addr == "d6:1c:bf:b7:76:62":
+        elif device_addr == "d6:c6:c7:39:a2:e8":
             table_name = "DEMO2"
         elif device_addr == "d7:ef:13:27:15:29":
             table_name = "DEMO3"
