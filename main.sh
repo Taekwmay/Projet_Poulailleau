@@ -12,3 +12,4 @@ tar -xzvf main.tar.gz
 cd /tmp/projmet/Projet_Poulailleau-main
 chmod 766 meteo.py
 sudo python3 meteo.py 2>&1
+
