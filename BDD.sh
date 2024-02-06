@@ -1,3 +1,6 @@
+#!/bin/bash
+
+# Vérification et installation de debconf-utils si nécessaire
 if ! dpkg -l | grep -q debconf-utils; then
     sudo apt-get update
     sudo apt-get install -y debconf-utils
@@ -28,6 +31,24 @@ echo "CREATE USER '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_USER_PASSWORD'
 echo "GRANT ALL PRIVILEGES ON $DATABASE_NAME.* TO '$MYSQL_USER'@'localhost';" | sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD"
 echo "FLUSH PRIVILEGES;" | sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD"
 
+# Création des tables pour les capteurs DEMO 1, DEMO 2 et DEMO 3
+echo "USE $DATABASE_NAME;
+CREATE TABLE IF NOT EXISTS DEMO1 (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    valeur FLOAT
+);
+CREATE TABLE IF NOT EXISTS DEMO2 (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    valeur FLOAT
+);
+CREATE TABLE IF NOT EXISTS DEMO3 (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    valeur FLOAT
+);" | sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD"
+
 # Suppression du fichier de configuration temporaire
 rm mysql-config.cfg
 
@@ -35,3 +56,4 @@ rm mysql-config.cfg
 echo "MySQL a été installé avec le mot de passe root : $MYSQL_ROOT_PASSWORD"
 echo "La base de données $DATABASE_NAME a été créée."
 echo "Un utilisateur MySQL '$MYSQL_USER' a été créé avec le mot de passe '$MYSQL_USER_PASSWORD' et les droits appropriés."
+echo "Les tables pour les capteurs DEMO1, DEMO2 et DEMO3 ont été créées."
