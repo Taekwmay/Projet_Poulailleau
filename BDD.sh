@@ -4,7 +4,7 @@ if ! dpkg -l | grep -q debconf-utils; then
 fi
 
 MYSQL_ROOT_PASSWORD="mariadb"
-DATABASE_NAME="nom_de_votre_base_de_donnees"
+DATABASE_NAME="mariadb"
 
 echo "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD" > mysql-config.cfg
 echo "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD" >> mysql-config.cfg
