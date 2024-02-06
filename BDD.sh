@@ -36,17 +36,23 @@ echo "USE $DATABASE_NAME;
 CREATE TABLE IF NOT EXISTS DEMO1 (
     id INT AUTO_INCREMENT PRIMARY KEY,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    valeur FLOAT
+    temperature FLOAT,
+    humidity FLOAT,
+    battery FLOAT
 );
 CREATE TABLE IF NOT EXISTS DEMO2 (
     id INT AUTO_INCREMENT PRIMARY KEY,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    valeur FLOAT
+    temperature FLOAT,
+    humidity FLOAT,
+    battery FLOAT
 );
 CREATE TABLE IF NOT EXISTS DEMO3 (
     id INT AUTO_INCREMENT PRIMARY KEY,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    valeur FLOAT
+    temperature FLOAT,
+    humidity FLOAT,
+    battery FLOAT
 );" | sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD"
 
 # Suppression du fichier de configuration temporaire
