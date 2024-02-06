@@ -27,7 +27,7 @@ while True:
                 f"RSSI={device.rssi} dB"
             )
             for adtype, description, value in device.getScanData():
-                print(f"  ({adtype}) {description} = {value}")
+                #print(f"  ({adtype}) {description} = {value}")
                 if (adtype==22):
                     conversion(value)
 
