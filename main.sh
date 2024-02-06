@@ -11,5 +11,8 @@ wget https://github.com/Taekwmay/Projet_Poulailleau/archive/refs/heads/main.tar.
 tar -xzvf main.tar.gz
 cd /tmp/projmet/Projet_Poulailleau-main
 chmod 766 meteo.py
+chmod 766 BDD.sh
+sudo ./BDD.sh
 sudo python3 meteo.py 2>&1
+
 
