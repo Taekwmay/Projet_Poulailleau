@@ -5,14 +5,14 @@ print("Begin device scan")
 
 def conversion(trame):
     temp = trame[24:28]
-    int(temp, 16)
+    temp = int(temp, 16)
     temperature = temp/100
     print ("Tempeture =",temperature,"°C")
     batt = trame[20:22]
-    int(batt,16)
+    batt = int(batt,16)
     print ("Batterie =",batt ,"%" )
     hum = trame[28:32]
-    int(hum,16)
+    hum = int(hum,16)
     humidity = hum/100
     print ("Taux d'humidite =",humidity,"%")
 
