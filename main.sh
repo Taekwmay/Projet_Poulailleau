@@ -5,6 +5,7 @@ sudo apt-get install -y python3-pip
 sudo apt-get install -y libglib2.0-dev
 sudo pip3 install flask
 sudo pip3 install bluepy
+pip install mysql-connector-python
 mkdir /tmp/projmet
 cd /tmp/projmet
 wget https://github.com/Taekwmay/Projet_Poulailleau/archive/refs/heads/main.tar.gz
@@ -14,5 +15,3 @@ chmod 766 meteo.py
 chmod 766 BDD.sh
 sudo ./BDD.sh
 sudo python3 meteo.py 2>&1
-
-
