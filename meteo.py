@@ -1,8 +1,22 @@
 from bluepy.btle import Scanner
 
+scanner = Scanner() 
+print("Begin device scan") 
 
-scanner = Scanner()
-print("Begin device scan")
+def conversion(trame):
+    temp = trame[24:28]
+    int(temp, 16)
+    temperature = temp/100
+    print ("Tempeture =",temperature,"°C")
+    batt = trame[20:22]
+    int(batt,16)
+    print ("Batterie =",batt ,"%" )
+    hum = trame[28:32]
+    int(hum,16)
+    humidity = hum/100
+    print ("Taux d'humidite =",humidity,"%")
+
+
 while True:
     devices = scanner.scan(timeout=3.0)
 
@@ -14,3 +28,7 @@ while True:
             )
             for adtype, description, value in device.getScanData():
                 print(f"  ({adtype}) {description} = {value}")
+                if (adtype==22):
+                    conversion(value)
+
+    
