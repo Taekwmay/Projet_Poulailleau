@@ -1,0 +1,29 @@
+body {
+    background-image: url('file:///C:/Users/marti/OneDrive/Bureau/dev_web/projet_meteo/im/nuagess.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif; /* Utilisez la police de votre choix */
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+}
+h1, h2 {
+    color: #333; /* Couleur du texte pour les titres */
+}
+
+#realtime-data, #historical-data {
+    margin-top: 20px;
+}
+
+#realtime-data p, #historical-data p {
+    font-size: 18px; /* Taille de police des paragraphes */
+}
+
+#temperature-chart, #humidity-chart {
+    width: 50%; /* Largeur des graphiques */
+    float: left; /* Alignement des graphiques côte à côte */
+}
