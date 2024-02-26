@@ -13,15 +13,15 @@ def get_data_from_mysql():
             cursor = conn.cursor()
 
             # Récupération des données de la table DEMO1
-            cursor.execute("SELECT * FROM DEMO1;")
+            cursor.execute("SELECT * FROM DEMO1")
             data_demo1 = cursor.fetchall()
 
             # Récupération des données de la table DEMO2
-            cursor.execute("SELECT * FROM DEMO2;")
+            cursor.execute("SELECT * FROM DEMO2")
             data_demo2 = cursor.fetchall()
 
             # Récupération des données de la table DEMO3
-            cursor.execute("SELECT * FROM DEMO3;")
+            cursor.execute("SELECT * FROM DEMO3")
             data_demo3 = cursor.fetchall()
 
             cursor.close()
