@@ -10,7 +10,7 @@ csv_date = datetime.datetime(year=current_datetime.year, month=current_datetime.
 while True:
     formatted_csv_date = csv_date.strftime("%Y%m%d")
     formatted_csv_hour = csv_date.strftime("%H")
-    url = f"https://donneespubliques.meteofrance.fr/?fond=donnee_libre&prefixe=Txt%2FSynop%2Fsynop&extension=csv&date={formatted_csv_date}&reseau={formatted_csv_hour}"
+    url = f"https://donneespubliques.meteofrance.fr/?fond=donnee_libre&prefixe=Txt%2FSynop%2Fsynop&extension=csv&date={formatted_csv_date}&reseau={formatted_csv_hour}.csv"
     response = requests.get(url)
     if response.ok:
         data = response.content.decode('utf-8')  # Décode les octets en une chaîne de caractères
