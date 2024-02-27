@@ -1,0 +1,48 @@
+/* Réinitialisation de quelques styles par défaut pour une apparence cohérente */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+li {
+    background-color: #f4f4f4;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Spécifique pour chaque table DEMO pour différencier visuellement */
+/* DEMO1 */
+ul:first-of-type li {
+    border-left: 5px solid royalblue;
+}
+
+/* DEMO2 */
+ul:nth-of-type(2) li {
+    border-left: 5px solid darkorange;
+}
+
+/* DEMO3 */
+ul:last-of-type li {
+    border-left: 5px solid seagreen;
+}
+
+
+
