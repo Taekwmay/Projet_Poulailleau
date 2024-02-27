@@ -53,7 +53,11 @@ CREATE TABLE IF NOT EXISTS DEMO3 (
     temperature FLOAT,
     humidity FLOAT,
     battery FLOAT
-);" | sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD"
+);
+CREATE TABLE IF NOT EXISTS Sensors (
+    device_addr VARCHAR(17) PRIMARY KEY,
+    sensor_name VARCHAR(255) NOT NULL
+);"| sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD"
 
 # Suppression du fichier de configuration temporaire
 rm mysql-config.cfg
