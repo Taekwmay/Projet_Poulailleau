@@ -6,6 +6,7 @@ sudo apt-get install -y libglib2.0-dev
 sudo pip3 install flask
 sudo pip3 install bluepy
 sudo pip3 install mysql-connector-python
+sudo pip3 install requests
 chmod 766 meteo.py
 chmod 766 BDD.sh
 sudo ./BDD.sh
