@@ -9,6 +9,8 @@ password="mariadb"
 mysql -u root -p$password <<EOF
 GRANT ALL ON mariadb.* TO 'mariadb'@'192.168.233.41' IDENTIFIED BY 'mariadb';
 FLUSH PRIVILEGES;
+GRANT ALL ON mariadb.* TO 'mariadb'@'192.168.233.153' IDENTIFIED BY 'mariadb';
+FLUSH PRIVILEGES;
 EOF
 sudo mv /tmp/projmet/Projet_Poulailleau-main/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 sudo service mysql restart
