@@ -24,4 +24,5 @@ while True:
                 #print(f"Temperature : {temperature_celsius:.2f} °C")
         break
     else:
+        print("erreur")
         break
