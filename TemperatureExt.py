@@ -14,7 +14,7 @@ def TempExt() :
         url = f"https://donneespubliques.meteofrance.fr/donnees_libres/Txt/Synop/synop.{formatted_csv_date}.csv"
         print(url)
         response = requests.get(url, allow_redirects=False)
-        if response.ok:
+        if response.status==200:
             data = response.content.decode('utf-8')  # Décode les octets en une chaîne de caractères
             csvfile = StringIO(data)  # Utilise StringIO pour traiter les données comme un fichier texte
             spamreader = csv.reader(csvfile, delimiter=';')
