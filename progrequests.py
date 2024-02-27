@@ -2,10 +2,11 @@ import requests
 import datetime
 import csv
 from io import StringIO
+from datetime import timedelta
 
 current_datetime = datetime.datetime.now()
 formatted_date = current_datetime.strftime("%Y%m%d%H")
-csv_date = datetime.datetime(year=current_datetime.year, month=current_datetime.month, day=current_datetime.day, hour=current_datetime.hour // 3 * 3, minute=0)
+csv_date = datetime.datetime(year=current_datetime.year, month=current_datetime.month, day=current_datetime.day+1, hour=current_datetime.hour // 3 * 3, minute=0)
 
 while True:
     formatted_csv_date = csv_date.strftime("%Y%m%d%H")
@@ -22,5 +23,5 @@ while True:
                 print(f"Temperature : {temperature_celsius:.2f} °C")
         break
     else:
-        print("erreur")
-        break
+        heure = timedelta(hours=3)
+        csv_date2 = csv_date - heure
