@@ -19,7 +19,9 @@ while True:
             if row[0] == "07510":
                 temperature_kelvin = float(row[7])  # Température en Kelvin
                 temperature_celsius = temperature_kelvin - 273.15  # Conversion en Celsius
-                print(f"Temperature : {temperature_celsius:.2f} °C")
+                print("%0.2f", temperature_kelvin)
+                print("%0.2f", temperature_celsius)
+                #print(f"Temperature : {temperature_celsius:.2f} °C")
         break
     else:
         break
