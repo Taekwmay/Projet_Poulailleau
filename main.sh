@@ -9,6 +9,11 @@ sudo pip3 install requests
 chmod 766 meteo.py
 chmod 766 BDD.sh
 sudo ./BDD.sh
+password="mariadb"
+mysql -u root -p$password <<EOF
+GRANT ALL ON mariadb.* TO 'mariadb'@'192.168.233.41' IDENTIFIED BY 'mariadb';
+FLUSH PRIVILEGES;
+EOF
 python3 -m venv .venv
 . .venv/bin/activate
 pip install Flask
