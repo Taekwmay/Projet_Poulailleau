@@ -26,4 +26,4 @@ def TempExt() :
             break
         else:
             heure = timedelta(hours=3)
-            csv_date2 = csv_date - heure
+            csv_date = csv_date - heure
