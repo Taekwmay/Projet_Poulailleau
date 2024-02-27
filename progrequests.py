@@ -12,6 +12,7 @@ while True :
     url = f"https://donneespubliques.meteofrance.fr/donnees_libres/Txt/Synop/synop.{formated_csv_date}.csv"
     data = requests.get(url)
     if data :
+        data = data.content.decode('utf-8')
         csvfile = BytesIO(data.content)
         spamreader = csv.reader(csvfile, delimiter=';')
         for row in spamreader:
