@@ -25,7 +25,7 @@ def TempExt() :
                     temperature_celsius = temperature_kelvin - 273.15  # Conversion en Celsius
                     print(f"Temperature : {temperature_celsius:.2f} °C")
                     return temperature_celsius
-            break
         else:
             heure = timedelta(hours=3)
             csv_date = csv_date - heure
+            print(csv_date)
