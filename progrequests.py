@@ -21,7 +21,7 @@ def TempExt :
                 if row[0] == "07510":
                     temperature_kelvin = float(row[7])  # Température en Kelvin
                     temperature_celsius = temperature_kelvin - 273.15  # Conversion en Celsius
-                    print(f"Temperature : {temperature_celsius:.2f} °C")
+                    return temperature_celsius
             break
         else:
             heure = timedelta(hours=3)
