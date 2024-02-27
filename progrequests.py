@@ -17,7 +17,9 @@ while True:
         spamreader = csv.reader(csvfile, delimiter=';')
         for row in spamreader:
             if row[0] == "07510":
-                print(row[7] - 273.15)
+                temperature_kelvin = float(row[7])  # Température en Kelvin
+                temperature_celsius = temperature_kelvin - 273.15  # Conversion en Celsius
+                print(f"Temperature : {temperature_celsius:.2f} °C")
         break
     else:
         break
