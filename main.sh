@@ -9,9 +9,10 @@ sudo pip3 install requests
 chmod 766 meteo.py
 chmod 766 BDD.sh
 sudo ./BDD.sh
-sudo python3 meteo.py 2>&1
 python3 -m venv .venv
 . .venv/bin/activate
 pip install Flask
 pip install mysql-connector-python
 flask --app app run --host=0.0.0.0
+sudo python3 meteo.py 2>&1
+
