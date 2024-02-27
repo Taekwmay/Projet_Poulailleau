@@ -4,7 +4,7 @@ import csv
 from io import StringIO
 from datetime import timedelta
 
-def TempExt :
+def TempExt() :
     current_datetime = datetime.datetime.now()
     formatted_date = current_datetime.strftime("%Y%m%d%H")
     csv_date = datetime.datetime(year=current_datetime.year, month=current_datetime.month, day=current_datetime.day+1, hour=current_datetime.hour // 3 * 3, minute=0)
