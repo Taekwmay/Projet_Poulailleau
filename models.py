@@ -21,7 +21,7 @@ def get_data_from_mysql(table_name):
 
 def SensorInit(device_addr,sensor_name) :
     with get_db_connection().cursor() as cursor:
-        cursor.execute("SELECT * FROM sensors WHERE device_addr= %s",(device_addr,))
+        cursor.execute("SELECT * FROM Sensors WHERE device_addr= %s",(device_addr,))
         row=cursor.fetchone()
 
         if not row :
