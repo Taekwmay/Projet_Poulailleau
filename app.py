@@ -13,9 +13,9 @@ def index():
 @app.route('/update')
 def update_Sensor():
     DEMO1 = SensorInit(device_addr="d6:1c:bf:b7:76:62", sensor_name="DEMO1")
-    DEMO2 = SensorInit("d6:c6:c7:39:a2:e8", "DEMO2")
-    DEMO3 = SensorInit("d7:ef:13:27:15:29", "DEMO3")
-#    return render_template('index.html',
+    DEMO2 = SensorInit(device_addr="d6:c6:c7:39:a2:e8", sensor_name="DEMO2")
+    DEMO3 = SensorInit(device_addr="d7:ef:13:27:15:29", sensor_name="DEMO3")
+    return render_template('index.html',
 
 if __name__ == '__main__':
     app.run(debug=True)
