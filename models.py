@@ -25,7 +25,7 @@ def SensorInit(device_addr,sensor_name) :
         row=cursor.fetchone()
 
         if not row :
-            sql_insert_query = f"INSERT INTO Sensors (device_addr, sensor_name) VALUES (%s, %s)
+            sql_insert_query = f"INSERT INTO Sensors (device_addr, sensor_name) VALUES (%s, %s)"
             cursor.execute(sql_insert_query,(device_addr,sensor_name))
 
 SensorInit("d6:1c:bf:b7:76:62","DEMO1")
