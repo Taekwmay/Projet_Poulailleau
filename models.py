@@ -63,6 +63,7 @@ def SensorInit(device_addr, sensor_name):
             sql_insert_query = "INSERT INTO Sensors (device_addr, sensor_name) VALUES (%s, %s)"
             cursor.execute(sql_insert_query, (device_addr, sensor_name))
             print("valeur implantees")
+            conn.commit()
     conn.close()
 
 SensorInit("d6:1c:bf:b7:76:62","DEMO1")
