@@ -31,13 +31,15 @@
             <li>{{ row }}</li>
         {% endfor %}
     </ul>
-    <h2>Changer le nom du capteur</h2>
-    <form action="/update_sensor" method="post">
-        <label for="sensor_id">ID du capteur :</label>
-        <input type="text" id="sensor_id" name="sensor_id" required><br><br>
-        <label for="new_name">Nouveau nom :</label>
-        <input type="text" id="new_name" name="new_name" required><br><br>
-        <input type="submit" value="Mettre à jour">
+   <h1>Change Sensor Names</h1>
+    <form action="/update_Sensor" method="post">
+        <label for="DEMO1">DEMO1:</label>
+        <input type="text" id="DEMO1" name="DEMO1" required><br><br>
+        <label for="DEMO2">DEMO2:</label>
+        <input type="text" id="DEMO2" name="DEMO2" required><br><br>
+        <label for="DEMO3">Salon:</label>
+        <input type="text" id="DEMO3" name="DEMO3" required><br><br>
+        <input type="submit" value="Update">
     </form>
 </body>
 </html>
