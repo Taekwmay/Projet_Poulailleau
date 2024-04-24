@@ -55,12 +55,12 @@ def get_data_from_mysql(table_name):
 def SensorInit(device_addr, sensor_name):
     conn = get_db_connection()
     with conn.cursor() as cursor:
-        cursor.execute("SELECT * FROM Sensors WHERE device_addr='%s'", (device_addr,))
+        cursor.execute("SELECT * FROM Sensors WHERE device_addr=%s", (device_addr,))
         row = cursor.fetchone()
         print("recuperation valeurs",row)
 
         if not row:
-            sql_insert_query = "INSERT INTO Sensors (device_addr, sensor_name) VALUES ('%s', '%s')"
+            sql_insert_query = "INSERT INTO Sensors (device_addr, sensor_name) VALUES (%s, %s)"
             cursor.execute(sql_insert_query, (device_addr, sensor_name))
             print("valeur implantees")
     conn.close()
