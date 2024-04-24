@@ -68,7 +68,7 @@ def SensorInit(device_addr, sensor_name):
 
 SensorInit("d6:1c:bf:b7:76:62","DEMO1")
 print("1")
-SensorInit("d6:1c:bf:b7:76:62","DEMO1")
+SensorInit("d6:c6:c7:39:a2:e8","DEMO2")
 print("2")
 SensorInit("d6:1c:bf:b7:76:62","DEMO1")
 print("3")     
