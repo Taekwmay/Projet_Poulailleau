@@ -54,7 +54,7 @@ def get_data_from_mysql(table_name):
 
 def SensorInit(device_addr, sensor_name):
     conn = get_db_connection()
-    with conn.cursor() as cursor:
+    with conn.cursor(buffered=True) as cursor:
         cursor.execute("SELECT * FROM Sensors WHERE device_addr=%s", (device_addr,))
         row = cursor.fetchone()
         print("recuperation valeurs",row)
