@@ -23,12 +23,17 @@ def SensorInit(device_addr,sensor_name) :
     with get_db_connection().cursor() as cursor:
         cursor.execute("SELECT * FROM Sensors WHERE device_addr= %s",(device_addr,))
         row=cursor.fetchone()
+        print("recuperation valeurs")
 
         if not row :
             sql_insert_query = f"INSERT INTO Sensors (device_addr, sensor_name) VALUES (%s, %s)"
             cursor.execute(sql_insert_query,(device_addr,sensor_name))
+            print("valeur implantees")
 
 SensorInit("d6:1c:bf:b7:76:62","DEMO1")
+print("1")
 SensorInit("d6:1c:bf:b7:76:62","DEMO1")
+print("2")
 SensorInit("d6:1c:bf:b7:76:62","DEMO1")
+print("3")
         
