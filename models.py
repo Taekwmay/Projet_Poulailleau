@@ -18,3 +18,17 @@ def get_data_from_mysql(table_name):
     cursor.close()
     conn.close()
     return data
+
+def SensorInit(device_addr,sensor_name) :
+    with get_db_connection().cursor() as cursor:
+        cursor.execute("SELECT * FROM sensors WHERE device_addr= %s",(device_addr,))
+        row=cursor.fetchone()
+
+        if not row :
+            sql_insert_query = f"INSERT INTO Sensors (device_addr, sensor_name) VALUES (%s, %s)
+            cursor.execute(sql_insert_query,(device_addr,sensor_name))
+
+SensorInit("d6:1c:bf:b7:76:62","DEMO1")
+SensorInit("d6:1c:bf:b7:76:62","DEMO1")
+SensorInit("d6:1c:bf:b7:76:62","DEMO1")
+        
