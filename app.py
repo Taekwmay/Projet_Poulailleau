@@ -12,7 +12,7 @@ def index():
     return render_template('index.html', data_demo1=data_demo1, data_demo2=data_demo2, data_demo3=data_demo3, tempext=round(TempExt(),2))
 @app.route('/update')
 def update_Sensor():
-    DEMO1 = SensorInit(device_addr="d6:1c:bf:b7:76:62", "DEMO1")
+    DEMO1 = SensorInit(device_addr="d6:1c:bf:b7:76:62", sensor_name="DEMO1")
     DEMO2 = SensorInit("d6:c6:c7:39:a2:e8", "DEMO2")
     DEMO3 = SensorInit("d7:ef:13:27:15:29", "DEMO3")
 #    return render_template('index.html',
