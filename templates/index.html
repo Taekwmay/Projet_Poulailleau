@@ -1,6 +1,6 @@
 <!-- templates/index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="refresh" content="300">
@@ -31,5 +31,13 @@
             <li>{{ row }}</li>
         {% endfor %}
     </ul>
+    <h2>Changer le nom du capteur</h2>
+    <form action="/update_sensor" method="post">
+        <label for="sensor_id">ID du capteur :</label>
+        <input type="text" id="sensor_id" name="sensor_id" required><br><br>
+        <label for="new_name">Nouveau nom :</label>
+        <input type="text" id="new_name" name="new_name" required><br><br>
+        <input type="submit" value="Mettre à jour">
+    </form>
 </body>
 </html>
