@@ -68,6 +68,9 @@ def submit():
 
 @app.route('/graph')
 def graph():
+    data_demo1 = get_data_from_mysql(table_name="DEMO1")
+    data_demo2 = get_data_from_mysql(table_name="DEMO2")
+    data_demo3 = get_data_from_mysql(table_name="DEMO3")
     return render_template('graph.html')
     
 if __name__ == '__main__':
