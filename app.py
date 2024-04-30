@@ -31,7 +31,7 @@ def index():
         host="localhost",
         user="mariadb",
         password="mariadb",
-        database="my_database"
+        database="mariadb"
     )
     cursor = conn.cursor()
     recup1="select sensor_name from Sensors where device_addr like 'd6:1c:bf:b7:76:62';"
