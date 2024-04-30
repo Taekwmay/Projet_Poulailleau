@@ -76,6 +76,3 @@ def graph():
 if __name__ == '__main__':
     app.run(host='192.168.233.153', debug=True)
 
-@app.route('/change_seuil')
-def form_seuil():
-    return render_template('change_seuil.html')
