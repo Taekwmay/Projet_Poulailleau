@@ -8,54 +8,27 @@
 <body>
     <canvas id="myChart" width="400" height="400"></canvas>
     <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line', // ou 'bar', selon le type de graphique désiré
-            data: {
-                labels: [], // Mettre à jour avec les labels appropriés
-                datasets: [{
-                    label: 'DEMO1',
-                    data: [],
-                    borderColor: 'red',
-                    borderWidth: 1
-                }, {
-                    label: 'DEMO2',
-                    data: [],
-                    borderColor: 'blue',
-                    borderWidth: 1
-                }, {
-                    label: 'DEMO3',
-                    data: [],
-                    borderColor: 'green',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
         function fetchData() {
             $.ajax({
                 url: '/graph_data',
                 type: 'GET',
                 success: function(data) {
-                    myChart.data.labels = data.labels; // Mettez à jour si vous avez des labels dynamiques
-                    myChart.data.datasets[0].data = data.demo1;
-                    myChart.data.datasets[1].data = data.demo2;
-                    myChart.data.datasets[2].data = data.demo3;
-                    myChart.update();
+                    updateChartData(data.demo1, 0); // pour DEMO1
+                    updateChartData(data.demo2, 1); // pour DEMO2
+                    updateChartData(data.demo3, 2); // pour DEMO3
                 }
             });
         }
-
-        // Récupérer les données toutes les 5 secondes
+    
+        function updateChartData(data, datasetIndex) {
+            myChart.data.labels = data.map(item => new Date(item[0]).toLocaleTimeString());
+            myChart.data.datasets[datasetIndex].data = data.map(item => item[1]);
+            myChart.update();
+        }
+    
         setInterval(fetchData, 5000);
     </script>
+
 </body>
 </html>
 
