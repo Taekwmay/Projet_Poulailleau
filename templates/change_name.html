@@ -1,0 +1,27 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="300">
+    <link rel="stylesheet" href=" {{url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changer les noms des capteurs</title>
+</head>
+<body>
+    <h1>Changement des noms des capteurs</h1>
+    <form action="/change_name.html" method="post">
+        
+        <label for="sensor1">d6:1c:bf:b7:76:62 = </label>
+        <input type="text" id="sensor1" name="sensor1">
+
+        <label for="sensor2">d6:c6:c7:39:a2:e8 = </label>
+        <input type="text" id="sensor2" name="sensor2">
+
+        <label for="sensor3">d7:ef:13:27:15:29 = </label>
+        <input type="text" id="sensor3" name="sensor3">
+
+        <input type="submit" value="Envoyer">
+    </form>
+</body>
+</html>

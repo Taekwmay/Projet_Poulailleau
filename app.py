@@ -11,6 +11,10 @@ def index():
     data_demo2 = get_data_from_mysql(table_name="DEMO2")
     data_demo3 = get_data_from_mysql(table_name="DEMO3")
     return render_template('index.html', data_demo1=data_demo1, data_demo2=data_demo2, data_demo3=data_demo3, tempext=round(TempExt(),2))
+
+@app.route('/change_name')
+def form_name():
+    return render_template('change_name.html')
     
 if __name__ == '__main__':
     app.run(host='192.168.233.153',debug=True)
