@@ -14,7 +14,7 @@ def index():
 @app.route('/update', methods=['POST'])
 def update_sensor_names():
     global sensors
-    new_sensor_names = request.form.getlist('sensor_name')
+    new_sensor_names = request.form.getlist(SensorInit(device_addr, sensor_name))
 
     # Met à jour les noms des capteurs avec les nouveaux noms
     for i in range(len(sensors)):
