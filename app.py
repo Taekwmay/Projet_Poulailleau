@@ -83,13 +83,10 @@ def graph():
     data_demo1 = get_data_from_mysql(table_name="DEMO1")
     data_demo2 = get_data_from_mysql(table_name="DEMO2")
     data_demo3 = get_data_from_mysql(table_name="DEMO3")
-        return jsonify({
+    return jsonify({
         'demo1': data_demo1,
         'demo2': data_demo2,
-        'demo3': data_demo3
-
-if __name__ == '__main__':
-    app.run(host='192.168.233.153', debug=True)
+        'demo3': data_demo3})
 
 def send_alert_email(alert_type, value):
     msg = Message('Alerte ' + alert_type, sender='raspberrypi@raspberrypi', recipients=['client.projmet@gmail.com'])
@@ -145,3 +142,6 @@ freq = cursor.fetchone()[0]
 while True:
     check_seuil()
     time.sleep(freq)
+
+if __name__ == '__main__':
+    app.run(host='192.168.233.153', debug=True)
