@@ -1,49 +1,52 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Données des capteurs</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <canvas id="liveChart"></canvas>
-    <script>
-        var ctx = document.getElementById('liveChart').getContext('2d');
-        var liveChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [],  // Étiquettes temporelles si vous en avez
-                datasets: [{
-                    label: 'Température DEMO1',
-                    data: [],
-                    borderColor: 'red',
-                    borderWidth: 1
-                }, {
-                    label: 'Humidité DEMO1',
-                    data: [],
-                    borderColor: 'blue',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+<canvas id="sensorChart"></canvas>
+<script>
+    var ctx = document.getElementById('sensorChart').getContext('2d');
+    var tempChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [], // Horodatages ici
+            datasets: [{
+                label: 'Température DEMO1',
+                yAxisID: 'yAxisTemp',
+                data: [],
+                borderColor: 'red'
+            }, {
+                label: 'Humidité DEMO1',
+                yAxisID: 'yAxisHumidity',
+                data: [],
+                borderColor: 'blue'
+            }]
+        },
+        options: {
+            scales: {
+                yAxisTemp: {
+                    type: 'linear',
+                    position: 'left',
+                    ticks: {
+                        callback: function(value) { return value + '°C'; }
+                    }
+                },
+                yAxisHumidity: {
+                    type: 'linear',
+                    position: 'right',
+                    ticks: {
+                        callback: function(value) { return value + '%'; }
                     }
                 }
             }
-        });
+        }
+    });
 
-        setInterval(function(){
-            fetch('/data').then(response => response.json()).then(data => {
-                console.log(data);
-                // Supposition que les données arrivent avec des horodatages, température et humidité
-                liveChart.data.labels.push(new Date().toLocaleTimeString());
-                liveChart.data.datasets[0].data.push(data.DEMO1.temperature);
-                liveChart.data.datasets[1].data.push(data.DEMO1.humidity);
-                liveChart.update();
-            });
-        }, 5000);  // Intervalle de mise à jour en millisecondes
-    </script>
-</body>
-</html>
+    function updateChart() {
+        fetch('/data').then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            tempChart.data.labels = data.DEMO1.map(d => d.timestamp);
+            tempChart.data.datasets[0].data = data.DEMO1.map(d => d.temperature);
+            tempChart.data.datasets[1].data = data.DEMO1.map(d => d.humidity);
+            tempChart.update();
+        });
+    }
+
+    setInterval(updateChart, 5000); // Update the chart every 5 seconds
+</script>
