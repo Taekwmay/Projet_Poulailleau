@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from models import get_data_from_mysql
 from TemperatureExt import TempExt
 
