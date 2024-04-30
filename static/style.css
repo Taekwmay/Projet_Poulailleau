@@ -16,6 +16,7 @@ header.header{
     color: white;
     line-height: 66px;
     background-color: #00695c;
+    margin-bottom: 20px
 }
 .menu{float: left;}
 .menu a{
