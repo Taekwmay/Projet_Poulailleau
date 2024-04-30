@@ -23,6 +23,9 @@ header.header{
     padding: 0 10px;
     color: inherit;
 }
+.container{
+    padding-top: 66px;
+}
 a {
     text-decoration: none;
     color: inherit;
