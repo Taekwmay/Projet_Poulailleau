@@ -31,20 +31,5 @@
             <li>{{ row }}</li>
         {% endfor %}
     </ul>
-    <h1>Liste des capteurs</h1>
-    <form action="/update" method="post">
-        {% for sensor in sensors %}
-            <label for="{{ sensor.device_addr }}">Nom du capteur {{ loop.index }} :</label>
-            <input type="text" id="{{ sensor.device_addr }}" name="sensor_name" value="{{ sensor.sensor_name }}"><br>
-        {% endfor %}
-        <button type="submit">Mettre à jour</button>
-    </form>
-
-    <h2>Données des capteurs</h2>
-    <p>DEMO1: {{ data_demo1 }}</p>
-    <p>DEMO2: {{ data_demo2 }}</p>
-    <p>DEMO3: {{ data_demo3 }}</p>
-
-    </form>
 </body>
 </html>
