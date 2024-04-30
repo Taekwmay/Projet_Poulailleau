@@ -19,6 +19,7 @@ def update_sensor_name(sensor_table, new_name):
     # Exécution de la requête de mise à jour
     sql = "UPDATE Sensors SET sensor_name = %s WHERE sensor_name = %s"
     cursor.execute(sql, (new_name, sensor_table))
+    recup1 = "select sensor_name from Sensors where device_addr like 'd6:1c:bf:b7:76:62';"
 
     # Validation de la transaction et fermeture de la connexion
     conn.commit()
@@ -29,7 +30,7 @@ def index():
     data_demo1 = get_data_from_mysql(table_name="DEMO1")
     data_demo2 = get_data_from_mysql(table_name="DEMO2")
     data_demo3 = get_data_from_mysql(table_name="DEMO3")
-    return render_template('index.html', data_demo1=data_demo1, data_demo2=data_demo2, data_demo3=data_demo3, DEMO1 = "toto", tempext=round(TempExt(),2))
+    return render_template('index.html', data_demo1=data_demo1, data_demo2=data_demo2, data_demo3=data_demo3, DEMO1 = cursor.execute(recup1), tempext=round(TempExt(),2))
 
 @app.route('/change_name')
 def form_name():
