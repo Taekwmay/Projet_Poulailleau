@@ -12,6 +12,6 @@ python3 -m venv .venv
 pip install Flask mysql-connector-python requests
 flask --app app run --host=0.0.0.0 &
 pip install Flask-Mail
-sudo python3 meteo.py 2>&1
-
-sudo python3 webbrowser.py
+python3 meteo.py 2>&1 &
+python3 alert_mail.py &
+python3 webbrowser.py
