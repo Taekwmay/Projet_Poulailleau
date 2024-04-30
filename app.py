@@ -65,7 +65,7 @@ def submit():
     update_sensor_name("d7:ef:13:27:15:29", sensor3)
 
     return redirect('/')
-@app.route('/graphe')
+@app.route('/graph')
 def graph():
     # Logique pour récupérer les données et afficher le graphique
     return render_template('graph.html')
