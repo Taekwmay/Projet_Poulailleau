@@ -64,7 +64,7 @@ def submit():
     update_sensor_name("d6:c6:c7:39:a2:e8", sensor2)
     update_sensor_name("d7:ef:13:27:15:29", sensor3)
 
-    return "Noms des capteurs mis à jour avec succès!"
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(host='192.168.233.153', debug=True)
