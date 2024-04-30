@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Graphique en Temps Réel</title>
+    <title>Graphique Température et Humidité</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -11,61 +11,54 @@
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'line', // Utilisation d'un graphique linéaire
             data: {
-                labels: [], // Labels pour les timestamps
+                labels: [], // Labels pour l'axe des temps, à remplir dynamiquement
                 datasets: [{
-                    label: 'DEMO1 Température/Humidité',
-                    data: [],
-                    borderColor: 'red',
+                    label: 'Température DEMO1 (°C)',
+                    yAxisID: 'y',
+                    data: [], // Données initiales vides
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
                     fill: false
                 }, {
-                    label: 'DEMO2 Température/Humidité',
-                    data: [],
-                    borderColor: 'blue',
-                    fill: false
-                }, {
-                    label: 'DEMO3 Température/Humidité',
-                    data: [],
-                    borderColor: 'green',
+                    label: 'Humidité DEMO1 (%)',
+                    yAxisID: 'y1',
+                    data: [], // Données initiales vides
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
                     fill: false
                 }]
             },
             options: {
                 scales: {
                     x: {
-                        type: 'time',
-                        time: {
-                            unit: 'minute',
-                            displayFormats: {
-                                minute: 'HH:mm'
-                            }
-                        },
+                        type: 'linear', // Type linéaire pour représenter le temps en secondes
+                        position: 'bottom',
                         title: {
                             display: true,
-                            text: 'Heure'
+                            text: 'Temps (secondes depuis le début de l’enregistrement)'
                         }
                     },
                     y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
                         title: {
                             display: true,
-                            text: 'Valeur'
+                            text: 'Température (°C)'
                         }
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                var label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                if (context.parsed.y !== null) {
-                                    label += context.parsed.y.toFixed(2);
-                                }
-                                return label;
-                            }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Humidité (%)'
+                        },
+                        grid: {
+                            drawOnChartArea: false // Dessine uniquement sur la zone du graphique dédiée
                         }
                     }
                 }
@@ -74,26 +67,21 @@
 
         function fetchData() {
             $.ajax({
-                url: '/graph_data',
+                url: '/graph',
                 type: 'GET',
                 success: function(data) {
-                    updateChartData(data.demo1, 0);
-                    updateChartData(data.demo2, 1);
-                    updateChartData(data.demo3, 2);
+                    myChart.data.labels = data.times; // Mise à jour des timestamps
+                    myChart.data.datasets[0].data = data.temperatures;
+                    myChart.data.datasets[1].data = data.humidities;
+                    myChart.update();
+                },
+                error: function(error) {
+                    console.error('Erreur de récupération des données:', error);
                 }
             });
         }
 
-        function updateChartData(data, datasetIndex) {
-            myChart.data.labels = data.map(item => new Date(item.timestamp));
-            myChart.data.datasets[datasetIndex].data = data.map(item => item.value);
-            myChart.update();
-        }
-
         setInterval(fetchData, 5000); // Mise à jour du graphique toutes les 5 secondes
-
     </script>
 </body>
 </html>
-
-
