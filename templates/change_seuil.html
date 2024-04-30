@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="300">
-    <link rel="stylesheet" href=" {{url_for('static', filename='style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modification des paramètres</title>
+    <title>Configuration des paramètres</title>
 </head>
 <body>
-    <h1>Réglages</h1>
-    <form action="/update" method="post">
-        <label for="temp_threshold">Seuil de température :</label>
-        <input type="number" name="temp_threshold" id="temp_threshold" value="{{ settings[0] }}" required><br><br>
+    <h1>Configuration des paramètres</h1>
+    <form action="#" method="post">
+        <label for="temperature">Seuil de température :</label>
+        <input type="number" id="temperature" name="temperature" min="-50" max="50" step="1"><br>
 
-        <label for="humidity_threshold">Seuil d'humidité :</label>
-        <input type="number" name="humidity_threshold" id="humidity_threshold" value="{{ settings[1] }}" required><br><br>
+        <label for="humidite">Seuil d'humidité :</label>
+        <input type="number" id="humidite" name="humidite" min="0" max="100" step="1"><br>
 
-        <label for="scan_frequency">Fréquence de scrutation :</label>
-        <input type="number" name="scan_frequency" id="scan_frequency" value="{{ settings[2] }}" required><br><br>
+        <label for="frequence">Fréquence de scrutation :</label>
+        <input type="number" id="frequence" name="frequence" min="1" max="60" step="1"><br>
 
-        <label for="recipients">Destinataires des e-mails :</label>
-        <input type="text" name="recipients" id="recipients" value="{{ settings[3] }}" required><br><br>
+        <label for="destinataires">Destinataires des mails :</label>
+        <input type="email" id="destinataires" name="destinataires"><br>
 
-        <input type="submit" value="Modifier">
+        <input type="submit" value="Enregistrer les paramètres">
     </form>
 </body>
 </html>
