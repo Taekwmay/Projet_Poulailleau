@@ -17,7 +17,7 @@ header.header{
     line-height: 66px;
     background-color: #00695c;
 }
-.menu{float: center;}
+.menu{float: left;}
 .menu a{
     padding: 0 10px;
     color: inherit;
