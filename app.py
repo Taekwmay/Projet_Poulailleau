@@ -105,24 +105,25 @@ def check_seuil():
     cursor = conn.cursor()
 
     # Récupération des seuils d'alerte de température et d'humidité depuis la table Param
-    recup_temp_seuil = "SELECT seuil_temp FROM Param;"
-    cursor.execute(recup_temp_seuil)
-    temp_seuil = cursor.fetchone()[0]
+    cursor.execute("SELECT seuil_temp, seuil_hum FROM Param")
+    temp_seuil, hum_seuil = cursor.fetchone()
 
-    recup_hum_seuil = "SELECT seuil_hum FROM Param;"
-    cursor.execute(recup_hum_seuil)
-    hum_seuil = cursor.fetchone()[0]
-
-
-    D1 = "DEMO1"
-    D2 = "DEMO2"
-    D3 = "DEMO3"
-    recup_current_temp = "SELECT combined_tables.temperature FROM (SELECT * FROM %s UNION ALL SELECT * FROM %s UNION ALL SELECT * FROM %s) AS combined_tables ORDER BY combined_tables.timestamp DESC LIMIT 1;"
-    cursor.execute(recup_current_temp,(D1,D2,D3,))
+    # Récupération de la température actuelle
+    cursor.execute("""
+        SELECT combined_tables.temperature 
+        FROM (SELECT * FROM DEMO1 UNION ALL SELECT * FROM DEMO2 UNION ALL SELECT * FROM DEMO3) AS combined_tables 
+        ORDER BY combined_tables.timestamp DESC 
+        LIMIT 1
+    """)
     temperature = cursor.fetchone()[0]
 
-    recup_current_hum = "SELECT combined_tables.humidity FROM (SELECT * FROM %s UNION ALL SELECT * FROM %s UNION ALL SELECT * FROM %s) AS combined_tables ORDER BY combined_tables.timestamp DESC LIMIT 1;"
-    cursor.execute(recup_current_hum,(D1,D2,D3,))
+    # Récupération de l'humidité actuelle
+    cursor.execute("""
+        SELECT combined_tables.humidity 
+        FROM (SELECT * FROM DEMO1 UNION ALL SELECT * FROM DEMO2 UNION ALL SELECT * FROM DEMO3) AS combined_tables 
+        ORDER BY combined_tables.timestamp DESC 
+        LIMIT 1
+    """)
     humidity = cursor.fetchone()[0]
 
     # Vérification des seuils et envoi d'un e-mail d'alerte si nécessaire
@@ -130,6 +131,10 @@ def check_seuil():
         send_alert_email('température', temperature)
     if humidity > hum_seuil:
         send_alert_email('humidité', humidity)
+
+    # Fermeture de la connexion à la base de données
+    cursor.close()
+    conn.close()
 
     return "Vérification des seuils effectuée"
 
