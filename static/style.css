@@ -7,6 +7,16 @@ body {
     margin: 0;
     padding: 20px;
 }
+header.header{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 66px;
+    color: white;
+    line-height: 66px;
+    background-color: #00695c;
+}
 
 h1 {
     color: #0275d8;
