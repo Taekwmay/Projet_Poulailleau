@@ -2,7 +2,6 @@ sudo raspi-config nonint do_ssh 0
 sudo apt-get install -y vsftpd python3-pip libglib2.0-dev
 sudo service vsftpd start
 sudo pip3 install bluepy  mysql-connector-python
-sudo apt install postfix
 chmod 766 meteo.py
 chmod 766 BDD.sh
 sudo ./BDD.sh

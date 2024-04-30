@@ -3,6 +3,8 @@ from flask_mail import Mail, Message
 from models import get_data_from_mysql
 from TemperatureExt import TempExt
 import mysql.connector
+import smtplib
+from email.mime.text import MIMEText
 import time
 
 
@@ -88,10 +90,20 @@ def graph():
         'demo2': data_demo2,
         'demo3': data_demo3})
 
-def send_alert_email(alert_type, value):
-    msg = Message('Alerte ' + alert_type, sender='raspberrypi@raspberrypi', recipients=['client.projmet@gmail.com'])
-    msg.body = f"Le seuil d'alerte de {alert_type} a été dépassé. Valeur actuelle : {value}"
-    mail.send(msg)
+def send_alert_email(subject, body, sender_email, receiver_email):
+    # Création du message
+    message = MIMEText(body)
+    message["From"] = sender_email
+    message["To"] = receiver_email
+    message["Subject"] = subject
+
+    # Connexion au serveur SMTP
+    with smtplib.SMTP("smtp.freesmtpservers.com",25) as server:
+        server.sendmail(sender_email, receiver_email, message.as_string())
+
+
+# Appel de la fonction send_email pour envoyer l'e-mail
+send_email(subject, body, sender_email, receiver_email)
 
 # Route pour vérifier les seuils et envoyer un e-mail d'alerte si nécessaire
 
@@ -128,9 +140,9 @@ def check_seuil():
 
     # Vérification des seuils et envoi d'un e-mail d'alerte si nécessaire
     if temperature > temp_seuil:
-        send_alert_email('température', temperature)
+        send_alert_email("température", "température supérieur à 25", "stationmeteo@meteo.com", "client@meteo.com")
     if humidity > hum_seuil:
-        send_alert_email('humidité', humidity)
+        send_alert_email("humidité", "humidité supérieur à 30%", "stationmeteo@meteo.com", "client@meteo.com")
 
     # Fermeture de la connexion à la base de données
     cursor.close()
