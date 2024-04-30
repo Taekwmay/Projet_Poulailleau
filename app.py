@@ -12,7 +12,7 @@ def update_sensor_name(sensor_table, new_name):
         host="localhost",
         user="mariadb",
         password="mariadb",
-        database="my_database"
+        database="mariadb"
     )
     cursor = conn.cursor()
 
