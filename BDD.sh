@@ -57,8 +57,13 @@ CREATE TABLE IF NOT EXISTS DEMO3 (
 CREATE TABLE IF NOT EXISTS Sensors (
     device_addr VARCHAR(17) PRIMARY KEY,
     sensor_name VARCHAR(255) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS Param (
+    seuil_temp float,
+    seuil_hum float,
+    freq double,
+    mails VARCHAR(1000)
 );"| sudo mysql -u root -p"$MYSQL_ROOT_PASSWORD"
-
 # Suppression du fichier de configuration temporaire
 rm mysql-config.cfg
 

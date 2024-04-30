@@ -34,3 +34,21 @@ SensorInit("d6:1c:bf:b7:76:62","DEMO1")
 SensorInit("d6:c6:c7:39:a2:e8","DEMO2")
 SensorInit("d7:ef:13:27:15:29","DEMO3")
   
+def ParamInit():
+    conn = get_db_connection()
+    with conn.cursor(buffered=True) as cursor:
+        seuil_temp = 25
+        seuil_hum = 30
+        freq = 60
+        mails = 'client.projmet@gmail.com'
+
+        cursor.execute("SELECT COUNT(*) FROM Param")
+        count = cursor.fetchone()[0]
+
+        if count == 0:
+            sql_insert_query = "INSERT INTO Param (seuil_temp, seuil_hum, freq, mails) VALUES (%s, %s, %s, %s)"
+            cursor.execute(sql_insert_query, (seuil_temp, seuil_hum, freq, mails))
+            conn.commit()
+    conn.close()
+
+ParamInit()
