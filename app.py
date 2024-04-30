@@ -10,12 +10,17 @@ def index():
     data_demo2 = get_data_from_mysql(table_name="DEMO2")
     data_demo3 = get_data_from_mysql(table_name="DEMO3")
     return render_template('index.html', data_demo1=data_demo1, data_demo2=data_demo2, data_demo3=data_demo3, tempext=round(TempExt(),2))
-@app.route('/update')
-def update_Sensor():
-    DEMO1 = SensorInit(device_addr="d6:1c:bf:b7:76:62", sensor_name="DEMO1")
-    DEMO2 = SensorInit(device_addr="d6:c6:c7:39:a2:e8", sensor_name="DEMO2")
-    DEMO3 = SensorInit(device_addr="d7:ef:13:27:15:29", sensor_name="DEMO3")
-    return render_template('index.html',
+    
+@app.route('/update', methods=['POST'])
+def update_sensor_names():
+    global sensors
+    new_sensor_names = request.form.getlist('sensor_name')
 
+    # Met à jour les noms des capteurs avec les nouveaux noms
+    for i in range(len(sensors)):
+        sensors[i]['sensor_name'] = new_sensor_names[i]
+
+    # Redirige vers la page d'accueil après la mise à jour
+    return render_template('index.html', data_demo1=data_demo1, data_demo2=data_demo2, data_demo3=data_demo3, tempext=round(TempExt(),2), sensors=sensors)
 if __name__ == '__main__':
     app.run(debug=True)
