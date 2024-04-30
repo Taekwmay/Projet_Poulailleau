@@ -15,4 +15,4 @@ pip install Flask mysql-connector-python requests
 flask --app app run --host=0.0.0.0 &
 sudo python3 meteo.py 2>&1
 
-sudo python3 ouvrir_page.py
+sudo python3 webbrowser.py
