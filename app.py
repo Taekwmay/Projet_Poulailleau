@@ -27,6 +27,18 @@ def update_sensor_name(sensor_table, new_name):
 
 @app.route('/')
 def index():
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="mariadb",
+        password="mariadb",
+        database="my_database"
+    )
+    cursor = conn.cursor()
+    recup1="select sensor_name from Sensors where device_addr like 'd6:1c:bf:b7:76:62';"
+    cursor.execute(sql)
+    DEMO1 = cursor.fetchall()
+    cursor.close()
+    conn.close()
     data_demo1 = get_data_from_mysql(table_name="DEMO1")
     data_demo2 = get_data_from_mysql(table_name="DEMO2")
     data_demo3 = get_data_from_mysql(table_name="DEMO3")
