@@ -36,12 +36,10 @@ def recup1():
 
     # Exécution de la requête de mise à jour
     recup1 = "select sensor_name from Sensors where device_addr like 'd6:1c:bf:b7:76:62';"
-    cursor.execute(recup1)
+    recup2 = cursor.execute(recup1)
 
-    # Validation de la transaction et fermeture de la connexion
-    conn.commit()
     conn.close()
-    return recup1
+    return recup2
 
 @app.route('/')
 def index():
