@@ -23,9 +23,9 @@ def submit():
     sensor3 = request.form['sensor3']
 
     # Faire ce que vous voulez avec les données ici, par exemple, les afficher
-    print(f"Capteur 1: {sensor1}, MAC: {mac1}")
-    print(f"Capteur 2: {sensor2}, MAC: {mac2}")
-    print(f"Capteur 3: {sensor3}, MAC: {mac3}")
+    print(f"Capteur 1: {sensor1}")
+    print(f"Capteur 2: {sensor2}")
+    print(f"Capteur 3: {sensor3}")
 
     # Vous pouvez également les enregistrer dans une base de données ou autre traitement nécessaire
 
