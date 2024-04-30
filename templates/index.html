@@ -18,21 +18,21 @@
     <div class="container">
         <h1>Température extérieur</h1>
         <p>Température en °C : {{ tempext }}°C</p>
-        <h1>Données de la table DEMO1</h1>
+        <h1>Données de la table {{DEMO1}}</h1>
         <ul>
             {% for row in data_demo1 %}
                 <li>{{ row }}</li>
             {% endfor %}
         </ul>
 
-        <h1>Données de la table DEMO2</h1>
+        <h1>Données de la table {{DEMO2}}</h1>
         <ul>
             {% for row in data_demo2 %}
                 <li>{{ row }}</li>
             {% endfor %}
         </ul>
 
-        <h1>Données de la table DEMO3</h1>
+        <h1>Données de la table {{DEMO3}}</h1>
         <ul>
             {% for row in data_demo3 %}
                 <li>{{ row }}</li>
