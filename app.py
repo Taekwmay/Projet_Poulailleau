@@ -6,7 +6,7 @@ import mysql.connector
 app = Flask(__name__)
 
 # Fonction pour se connecter à la base de données et mettre à jour le nom du capteur
-def update_sensor_name(sensor_table, new_name):
+def update_sensor_name(sensor_mac, new_name):
     # Connexion à la base de données
     conn = mysql.connector.connect(
         host="localhost",
@@ -17,8 +17,8 @@ def update_sensor_name(sensor_table, new_name):
     cursor = conn.cursor()
 
     # Exécution de la requête de mise à jour
-    sql = "UPDATE Sensors SET sensor_name = %s WHERE sensor_name = %s"
-    cursor.execute(sql, (new_name, sensor_table))
+    sql = "UPDATE Sensors SET sensor_name = %s WHERE device_addr = %s"
+    cursor.execute(sql, (new_name, sensor_mac))
 
     # Validation de la transaction et fermeture de la connexion
     conn.commit()
@@ -60,9 +60,9 @@ def submit():
     sensor3 = request.form['sensor3']
 
     # Mise à jour des noms des capteurs dans la base de données
-    update_sensor_name("DEMO1", sensor1)
-    update_sensor_name("DEMO2", sensor2)
-    update_sensor_name("DEMO3", sensor3)
+    update_sensor_name("d6:1c:bf:b7:76:62", sensor1)
+    update_sensor_name("d6:c6:c7:39:a2:e8", sensor2)
+    update_sensor_name("d7:ef:13:27:15:29", sensor3)
 
     return "Noms des capteurs mis à jour avec succès!"
 
