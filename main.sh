@@ -9,7 +9,8 @@ sudo mv /tmp/projmet/Projet_Poulailleau-main/50-server.cnf /etc/mysql/mariadb.co
 sudo service mysql restart
 python3 -m venv .venv
 . .venv/bin/activate
-pip install Flask mysql-connector-python requests
+pip install Flask
+pip install mysql-connector-python requests
 flask --app app run --host=0.0.0.0 &
 pip install Flask-Mail
 python3 meteo.py 2>&1 &
