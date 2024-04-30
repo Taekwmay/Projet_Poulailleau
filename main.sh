@@ -3,7 +3,6 @@ sudo apt-get install -y vsftpd python3-pip libglib2.0-dev
 sudo service vsftpd start
 sudo pip3 install bluepy  mysql-connector-python
 sudo apt install postfix
-
 chmod 766 meteo.py
 chmod 766 BDD.sh
 sudo ./BDD.sh
@@ -13,6 +12,7 @@ python3 -m venv .venv
 . .venv/bin/activate
 pip install Flask mysql-connector-python requests
 flask --app app run --host=0.0.0.0 &
+pip install Flask-Mail
 sudo python3 meteo.py 2>&1
 
 sudo python3 webbrowser.py
