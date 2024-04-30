@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from models import get_data_from_mysql
 from TemperatureExt import TempExt
-import requests
+
 
 app = Flask(__name__)
 
