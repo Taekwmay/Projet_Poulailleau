@@ -35,7 +35,7 @@ def index():
     )
     cursor = conn.cursor()
     recup1="select sensor_name from Sensors where device_addr like 'd6:1c:bf:b7:76:62';"
-    cursor.execute(sql)
+    cursor.execute(recup1)
     DEMO1 = cursor.fetchall()
     cursor.close()
     conn.close()
