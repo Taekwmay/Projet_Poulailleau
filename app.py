@@ -136,9 +136,9 @@ def check_seuil():
 
     # Vérification des seuils et envoi d'un e-mail d'alerte si nécessaire
     if temperature > temp_seuil:
-        send_alert_email("température", "température supérieur à 25", "stationmeteo@meteo.com", "client@meteo.com")
+        send_alert_email("température", "temperature superieur a 25", "stationmeteo@meteo.com", "client@meteo.com")
     if humidity > hum_seuil:
-        send_alert_email("humidité", "humidité supérieur à 30%", "stationmeteo@meteo.com", "client@meteo.com")
+        send_alert_email("humidite", "humidite superieur a 30%", "stationmeteo@meteo.com", "client@meteo.com")
 
     # Fermeture de la connexion à la base de données
     cursor.close()
