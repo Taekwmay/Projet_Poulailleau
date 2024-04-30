@@ -101,10 +101,6 @@ def send_alert_email(subject, body, sender_email, receiver_email):
     with smtplib.SMTP("smtp.freesmtpservers.com",25) as server:
         server.sendmail(sender_email, receiver_email, message.as_string())
 
-
-# Appel de la fonction send_email pour envoyer l'e-mail
-send_email(subject, body, sender_email, receiver_email)
-
 # Route pour vérifier les seuils et envoyer un e-mail d'alerte si nécessaire
 
 def check_seuil():
