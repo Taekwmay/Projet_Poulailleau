@@ -17,22 +17,45 @@
                 datasets: [{
                     label: 'DEMO1', // Nom du premier capteur
                     borderColor: 'red',
-                    data: [] // Les données de température ou d'humidité du premier capteur seront placées ici
+                    data: [], // Les données de température ou d'humidité du premier capteur seront placées ici
+                    yAxisID: 'temperature-y-axis'
                 }, {
                     label: 'DEMO2', // Nom du deuxième capteur
                     borderColor: 'blue',
-                    data: [] // Les données de température ou d'humidité du deuxième capteur seront placées ici
+                    data: [], // Les données de température ou d'humidité du deuxième capteur seront placées ici
+                    yAxisID: 'humidity-y-axis'
                 }, {
                     label: 'DEMO3', // Nom du troisième capteur
                     borderColor: 'green',
-                    data: [] // Les données de température ou d'humidité du troisième capteur seront placées ici
+                    data: [], // Les données de température ou d'humidité du troisième capteur seront placées ici
+                    yAxisID: 'humidity-y-axis'
                 }]
             },
             options: {
                 scales: {
+                    xAxes: [{
+                        type: 'time',
+                        time: {
+                            unit: 'minute' // Choisissez l'unité de temps appropriée (minute, heure, jour, etc.)
+                        }
+                    }],
                     yAxes: [{
+                        id: 'temperature-y-axis',
+                        type: 'linear',
+                        position: 'left',
                         ticks: {
-                            beginAtZero: true
+                            callback: function(value, index, values) {
+                                return value + '°C'; // Ajouter °C pour la température
+                            }
+                        }
+                    }, {
+                        id: 'humidity-y-axis',
+                        type: 'linear',
+                        position: 'right',
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return value + '%'; // Ajouter % pour l'humidité
+                            }
                         }
                     }]
                 }
@@ -67,11 +90,8 @@
             // Mettre à jour les données du graphique avec les nouvelles valeurs
             sensorChart.data.labels = timestamps; // Mettre à jour les horodatages
             sensorChart.data.datasets[0].data = temps_demo1; // Mettre à jour les données de température du capteur DEMO1
-            sensorChart.data.datasets[0].label = 'DEMO1'; // Mettre à jour le label du capteur DEMO1
             sensorChart.data.datasets[1].data = temps_demo2; // Mettre à jour les données de température du capteur DEMO2
-            sensorChart.data.datasets[1].label = 'DEMO2'; // Mettre à jour le label du capteur DEMO2
             sensorChart.data.datasets[2].data = temps_demo3; // Mettre à jour les données de température du capteur DEMO3
-            sensorChart.data.datasets[2].label = 'DEMO3'; // Mettre à jour le label du capteur DEMO3
 
             // Actualiser le graphique
             sensorChart.update();
@@ -93,4 +113,3 @@
     </script>
 </body>
 </html>
-
