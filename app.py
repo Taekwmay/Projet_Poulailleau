@@ -110,11 +110,20 @@ def check_seuil():
     temp_seuil = cursor.fetchone()[0]
 
     recup_hum_seuil = "SELECT seuil_hum FROM Param;"
-    cursor.execute("SELECT seuil_hum FROM Param")
+    cursor.execute(recup_hum_seuil)
     hum_seuil = cursor.fetchone()[0]
 
-    temperature = get_current_temperature()
-    humidity = get_current_humidity()
+
+    D1 = "DEMO1"
+    D2 = "DEMO2"
+    D3 = "DEMO3"
+    recup_current_temp = "SELECT combined_tables.temperature FROM (SELECT * FROM %s UNION ALL SELECT * FROM %s UNION ALL SELECT * FROM %s) AS combined_tables ORDER BY combined_tables.timestamp DESC LIMIT 1;"
+    cursor.execute(recup_current_temp,(D1,D2,D3,))
+    temperature = cursor.fetchone()[0]
+
+    recup_current_hum = "SELECT combined_tables.humidity FROM (SELECT * FROM %s UNION ALL SELECT * FROM %s UNION ALL SELECT * FROM %s) AS combined_tables ORDER BY combined_tables.timestamp DESC LIMIT 1;"
+    cursor.execute(recup_current_hum,(D1,D2,D3,))
+    humidity = cursor.fetchone()[0]
 
     # Vérification des seuils et envoi d'un e-mail d'alerte si nécessaire
     if temperature > temp_seuil:
