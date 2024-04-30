@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Données des capteurs</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="liveChart"></canvas>
+    <script>
+        var ctx = document.getElementById('liveChart').getContext('2d');
+        var liveChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],  // Étiquettes temporelles si vous en avez
+                datasets: [{
+                    label: 'Température DEMO1',
+                    data: [],
+                    borderColor: 'red',
+                    borderWidth: 1
+                }, {
+                    label: 'Humidité DEMO1',
+                    data: [],
+                    borderColor: 'blue',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        setInterval(function(){
+            fetch('/data').then(response => response.json()).then(data => {
+                console.log(data);
+                // Supposition que les données arrivent avec des horodatages, température et humidité
+                liveChart.data.labels.push(new Date().toLocaleTimeString());
+                liveChart.data.datasets[0].data.push(data.DEMO1.temperature);
+                liveChart.data.datasets[1].data.push(data.DEMO1.humidity);
+                liveChart.update();
+            });
+        }, 5000);  // Intervalle de mise à jour en millisecondes
+    </script>
+</body>
+</html>
