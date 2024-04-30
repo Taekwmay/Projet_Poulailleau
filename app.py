@@ -1,9 +1,21 @@
 from flask import Flask, render_template, request, redirect
+from flask_mail import Mail, Message
 from models import get_data_from_mysql
 from TemperatureExt import TempExt
 import mysql.connector
+import time
+
 
 app = Flask(__name__)
+
+app.config['MAIL_SERVER'] = 'smtp.example.com'  # Serveur SMTP
+app.config['MAIL_PORT'] = 465  # Port du serveur SMTP (SSL)
+app.config['MAIL_USERNAME'] = 'your-email@example.com'  # Adresse e-mail
+app.config['MAIL_PASSWORD'] = 'your-email-password'  # Mot de passe de l'adresse e-mail
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
 
 # Fonction pour se connecter à la base de données et mettre à jour le nom du capteur
 def update_sensor_name(sensor_mac, new_name):
@@ -79,3 +91,57 @@ def graph():
 if __name__ == '__main__':
     app.run(host='192.168.233.153', debug=True)
 
+def send_alert_email(alert_type, value):
+    msg = Message('Alerte ' + alert_type, sender='raspberrypi@raspberrypi', recipients=['client.projmet@gmail.com'])
+    msg.body = f"Le seuil d'alerte de {alert_type} a été dépassé. Valeur actuelle : {value}"
+    mail.send(msg)
+
+# Route pour vérifier les seuils et envoyer un e-mail d'alerte si nécessaire
+
+def check_seuil():
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="mariadb",
+        password="mariadb",
+        database="mariadb"
+    )
+    cursor = conn.cursor()
+
+    # Récupération des seuils d'alerte de température et d'humidité depuis la table Param
+    recup_temp_seuil = "SELECT seuil_temp FROM Param;"
+    cursor.execute(recup_temp_seuil)
+    temp_seuil = cursor.fetchone()[0]
+
+    recup_hum_seuil = "SELECT seuil_hum FROM Param;"
+    cursor.execute("SELECT seuil_hum FROM Param")
+    hum_seuil = cursor.fetchone()[0]
+
+    temperature = get_current_temperature()
+    humidity = get_current_humidity()
+
+    # Vérification des seuils et envoi d'un e-mail d'alerte si nécessaire
+    if temperature > temp_seuil:
+        send_alert_email('température', temperature)
+    if humidity > hum_seuil:
+        send_alert_email('humidité', humidity)
+
+    return "Vérification des seuils effectuée"
+
+
+conn = mysql.connector.connect(
+    host="localhost",
+    user="mariadb",
+    password="mariadb",
+    database="mariadb"
+)
+cursor = conn.cursor()
+
+# Récupération de la fréquence depuis la table Param
+recup_freq = "SELECT freq FROM Param;"
+cursor.execute(recup_freq)
+freq = cursor.fetchone()[0]
+
+# Appeler la fonction check_seuil() à une fréquence constante
+while True:
+    check_seuil()
+    time.sleep(freq)
